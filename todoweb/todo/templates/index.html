@@ -3,18 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <title>Список задач</title>
+  <!-- UIKit -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.6.22/dist/css/uikit.min.css" />
   <script src="https://cdn.jsdelivr.net/npm/uikit@3.6.22/dist/js/uikit.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/uikit@3.6.22/dist/js/uikit-icons.min.js"></script>
 </head>
 <body>
+  <!-- Строка поиска -->
   <div class="uk-container">
-    <form class="uk-search uk-search-default uk-margin-top uk-flex uk-width-1-1">
+    <form class="uk-search uk-search-default uk-margin-top uk-flex uk-width-1-1" method="get">
       <span uk-search-icon></span>
       <input class="uk-search-input" type="search" placeholder="Поиск..." name="search" {% if search %}value={{search}}{% endif %}>
-      <button class="uk-button uk-button-default uk-margin-left" type="submit">Найти</button>
+      <button class="uk-button uk-button-primary uk-margin-left" type="submit">Найти</button>
+      <!-- Переход к расширенному поиску -->
+      <a href="advanced-search/" class="uk-button uk-button-secondary uk-margin-left">Больше</a>
     </form>
   </div>
+
+  <!-- Задачи -->
   <div class="uk-container uk-margin-top">
     {% for task in tasks %}
       <div class="uk-card uk-card-default uk-margin">

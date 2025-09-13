@@ -1,10 +1,80 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Продвинутый поиск</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.6.22/dist/css/uikit.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.6.22/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.6.22/dist/js/uikit-icons.min.js"></script>
 </head>
 <body>
+    <!-- Форма с фильтрами -->
+    <div class="uk-container uk-margin-top">
+        <form class="uk-form-stacked" method="get">
+            <h3>Продвинутый поиск</h3>
 
+            <!-- Название -->
+            <div class="uk-margin">
+                <label class="uk-form-label" for="form-name">Название</label>
+                <div class="uk-form-controls">
+                    <input class="uk-input" id="form-name" type="text" name="name" placeholder="Введите название..." {% if name %}value={{name}}{% endif %}>
+                </div>
+            </div>
+
+            <!-- Описание -->
+            <div class="uk-margin">
+                <label class="uk-form-label" for="form-description">Описание</label>
+                <div class="uk-form-controls">
+                    <input class="uk-input" id="form-description" type="text" name="description" placeholder="Введите описание..." {% if description %}value={{description}}{% endif %}>
+                </div>
+            </div>
+
+            <!-- Статус -->
+            <div class="uk-margin">
+                <label class="uk-form-label" for="form-status">Статус</label>
+                <div class="uk-form-controls">
+                    <select class="uk-select" id="form-status" name="status">
+                        <option value="" {% if not status %}selected{% endif %}>Выберите статус...</option>
+                        <option value="В процессе" {% if status == "В процессе" %}selected{% endif %}>В процессе</option>
+                        <option value="Завершено" {% if status == "Завершено" %}selected{% endif %}>Завершено</option>
+                        <option value="Отменено" {% if status == "Отменено" %}selected{% endif %}>Отменено</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Дата создания -->
+            <div class="uk-margin">
+                <label class="uk-form-label" for="form-crdate">Дата создания</label>
+                <div class="uk-form-controls">
+                    <input class="uk-input" id="form-crdate" type="date" name="creation_date" {% if creation_date %}value={{creation_date}}{% endif %}>
+                </div>
+            </div>
+
+            <!-- Дедлайн -->
+            <div class="uk-margin">
+                <label class="uk-form-label" for="form-deadline">Дедлайн</label>
+                <div class="uk-form-controls">
+                    <input class="uk-input" id="form-deadline" type="date" name="deadline" {% if deadline %}value={{deadline}}{% endif %}>
+                </div>
+            </div>
+            <button class="uk-button uk-button-primary uk-margin" type="submit">Поиск</button>
+            <!-- Возврат к обычному поиску -->
+            <a href="/" class="uk-button uk-button-secondary uk-margin-left">Назад</a>
+        </form>
+    </div>
+
+    <!-- Задачи -->
+    <div class="uk-container uk-margin-top">
+    {% for task in tasks %}
+      <div class="uk-card uk-card-default uk-margin">
+        <div class="uk-card-body">
+          <h3 class="uk-card-title">{{ task.name }}</h3>
+          <p>{{ task.description }}</p>
+          <span class="uk-label">{{ task.status }}</span>
+          <p>Создано: {{ task.creation_date }} | Дедлайн: {{ task.deadline }} | Время выполнения: {{ task.timespan }}</p>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
 </body>
 </html>
