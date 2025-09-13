@@ -8,6 +8,13 @@
   <script src="https://cdn.jsdelivr.net/npm/uikit@3.6.22/dist/js/uikit-icons.min.js"></script>
 </head>
 <body>
+  <div class="uk-container">
+    <form class="uk-search uk-search-default uk-margin-top uk-flex uk-width-1-1">
+      <span uk-search-icon></span>
+      <input class="uk-search-input" type="search" placeholder="Поиск..." name="search" {% if search %}value={{search}}{% endif %}>
+      <button class="uk-button uk-button-default uk-margin-left" type="submit">Найти</button>
+    </form>
+  </div>
   <div class="uk-container uk-margin-top">
     {% for task in tasks %}
       <div class="uk-card uk-card-default uk-margin">
